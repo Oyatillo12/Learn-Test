@@ -1,6 +1,18 @@
 {
-  "name": "todo-test",
-  "workspaces": [
-    "apps/*"
-  ]
+    "name": "todo-test",
+    "workspaces": [
+        "apps/api",
+        "apps/ui"
+    ],
+    "scripts": {
+        "format": "prettier --ignore-unknown --write .",
+        "prepare": "husky",
+        "dev": "concurrently \"npm run dev:api\" \"npm run dev:ui\""
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.2",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.4.3",
+        "prettier": "^3.5.2"
+    }
 }
