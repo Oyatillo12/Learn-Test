@@ -1,0 +1,6 @@
+{
+  "name": "todo-test",
+  "workspaces": [
+    "apps/*"
+  ]
+}
