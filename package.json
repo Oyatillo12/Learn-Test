@@ -1,13 +1,14 @@
 {
     "name": "todo-test",
     "workspaces": [
-        "apps/api",
-        "apps/ui"
+        "apps/*"
     ],
     "scripts": {
         "format": "prettier --ignore-unknown --write .",
         "prepare": "husky",
-        "dev": "concurrently \"npm run dev:api\" \"npm run dev:ui\""
+        "dev": "concurrently  \"npm run dev:ui\" \"npm run dev:api\"",
+        "dev:api": "npm run dev -w apps/api",
+        "dev:ui": "npm run dev -w apps/ui"
     },
     "devDependencies": {
         "concurrently": "^9.1.2",
