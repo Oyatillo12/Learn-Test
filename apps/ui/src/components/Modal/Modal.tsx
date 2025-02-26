@@ -4,7 +4,7 @@ import { Dispatch, FC, MouseEvent, ReactNode, SetStateAction } from 'react'
 interface ModalProps {
     openModal: boolean
     setOpenModal: Dispatch<SetStateAction<boolean>>
-    children: ReactNode
+    children?: ReactNode
     title?: string
 }
 
@@ -23,18 +23,26 @@ export const Modal: FC<ModalProps> = ({
     return (
         <div
             id="modal-outer"
+            data-testid="modal-outer"
             onClick={handleClose}
-            className={`fixed inset-0 flex justify-center items-center bg-black/50 transition-all duration-500
+            className={` modal-outer fixed inset-0 flex justify-center items-center bg-black/50 transition-all duration-500
                 ${openModal ? 'scale-100' : 'scale-0'}`}
         >
             <div
-                className={
-                    'w-[500px] rounded-lg shadow-xl bg-white p-4 duration-300 '
-                }
+                onClick={() => {
+                    console.log(openModal)
+                }}
+                className={'w-[500px] rounded-lg shadow-xl bg-white p-4'}
             >
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-[22px] font-bold">{title}</h2>
+                    <h2
+                        data-testid="modal-title"
+                        className="text-[22px] font-bold"
+                    >
+                        {title}
+                    </h2>
                     <button
+                        data-testid="modal-close-btn"
                         onClick={() => setOpenModal(false)}
                         className="text-gray-500 hover:bg-gray-100 rounded-lg p-1"
                     >

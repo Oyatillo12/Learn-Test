@@ -13,7 +13,7 @@ export const Todo = () => {
         try {
             setIsLoading(true)
             const res = await todoApi.getTodos()
-            if (!res.data) return
+            if (!res?.data) return
 
             setTodos(res.data)
         } catch (err) {
@@ -71,8 +71,11 @@ export const Todo = () => {
     return (
         <div className="flex flex-col gap-6 mt-8">
             <div className="flex items-center justify-between">
-                <h2 className="text-[26px] font-bold">Todos</h2>
+                <h2 data-testid="todo-title" className="text-[26px] font-bold">
+                    Todos
+                </h2>
                 <button
+                    data-testid="todo-create-btn"
                     onClick={handleCrateStart}
                     className="bg-[#0EB182] text-white px-4 py-2 rounded-lg hover:opacity-70 duration-300"
                 >
@@ -82,7 +85,10 @@ export const Todo = () => {
             {isLoading ? (
                 <div className="flex justify-center items-center h-32">
                     <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-[#0EB182] border-gray-200"></div>
-                    <span className="ml-3 text-gray-600 text-lg">
+                    <span
+                        data-testid="todo-loading"
+                        className="ml-3 text-gray-600 text-lg"
+                    >
                         Loading...
                     </span>
                 </div>
@@ -99,7 +105,10 @@ export const Todo = () => {
                             />
                         ))
                     ) : (
-                        <p className="text-gray-500 text-center">
+                        <p
+                            data-testid="todo-empty"
+                            className="text-gray-500 text-center"
+                        >
                             No todos found
                         </p>
                     )}

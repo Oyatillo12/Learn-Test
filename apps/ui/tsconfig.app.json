@@ -22,7 +22,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "noUncheckedSideEffectImports": true
+        "noUncheckedSideEffectImports": true,
+        "types": ["vitest/globals"]
     },
-    "include": ["src", "**/*.ts", "**/*.tsx", "types"]
+    "include": ["src", "**/*.ts", "**/*.tsx", "types", "./src/test/setup.ts"]
 }

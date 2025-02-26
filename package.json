@@ -8,7 +8,8 @@
         "prepare": "husky",
         "dev": "concurrently  \"npm run dev:ui\" \"npm run dev:api\"",
         "dev:api": "npm run dev -w apps/api",
-        "dev:ui": "npm run dev -w apps/ui"
+        "dev:ui": "npm run dev -w apps/ui",
+        "test": "npm run test -w apps/ui"
     },
     "devDependencies": {
         "concurrently": "^9.1.2",
