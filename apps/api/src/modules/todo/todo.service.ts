@@ -41,9 +41,17 @@ export class TodoService {
 
     findOne = async (id: string): Promise<IResponse<TodoEntity>> => {
         try {
-            const todo = await this.todoRepository.findOneBy({
-                _id: new ObjectId(id),
+            const todo = await this.todoRepository.findOne({
+                where: {
+                    _id: new ObjectId(id),
+                },
             })
+
+            if (!todo) {
+                return {
+                    success: false,
+                }
+            }
             return {
                 success: true,
                 data: todo!,
@@ -58,15 +66,26 @@ export class TodoService {
         updateTodoDto: CreateTodoDto
     ): Promise<IResponse<TodoEntity>> => {
         try {
-            const result = await this.todoRepository.update(id, updateTodoDto)
+            const { data: todo } = await this.findOne(id)
 
-            if (!result.affected) {
+            if (!todo) {
                 return {
                     success: false,
                     message: 'Todo not found or not updated',
                 }
             }
-            return { success: true, message: 'Todo updated successfully' }
+
+            todo._id = new ObjectId(id)
+            todo.title = updateTodoDto.title
+            todo.isCompleted = updateTodoDto.isCompleted
+
+            const res = await this.todoRepository.save(todo)
+
+            return {
+                success: true,
+                message: 'Todo updated successfully',
+                data: res,
+            }
         } catch (err) {
             throw new HttpException(err, HttpStatus.BAD_REQUEST)
         }
@@ -95,7 +114,9 @@ export class TodoService {
 
     remove = async (id: string): Promise<IResponse<ISuccessRes>> => {
         try {
-            const result = await this.todoRepository.delete(id)
+            const result = await this.todoRepository.delete({
+                _id: new ObjectId(id),
+            })
 
             if (!result.affected) {
                 return {

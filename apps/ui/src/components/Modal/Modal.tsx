@@ -28,12 +28,7 @@ export const Modal: FC<ModalProps> = ({
             className={` modal-outer fixed inset-0 flex justify-center items-center bg-black/50 transition-all duration-500
                 ${openModal ? 'scale-100' : 'scale-0'}`}
         >
-            <div
-                onClick={() => {
-                    console.log(openModal)
-                }}
-                className={'w-[500px] rounded-lg shadow-xl bg-white p-4'}
-            >
+            <div className={'w-[500px] rounded-lg shadow-xl bg-white p-4'}>
                 <div className="flex items-center justify-between mb-4">
                     <h2
                         data-testid="modal-title"

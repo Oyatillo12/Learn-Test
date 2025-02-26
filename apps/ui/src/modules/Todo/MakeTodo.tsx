@@ -46,6 +46,7 @@ export const MakeTodo = ({
             const id = editTodo?._id
             if (id) {
                 const res = await todoApi.updateTodo({ data: todo, id })
+                console.log(res)
                 if (res.success) {
                     handleSuccess()
                 }
