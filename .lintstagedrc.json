@@ -1,3 +1,4 @@
 {
-    "**/*.{js,ts,tsx,json,md}": "prettier --write"
+    "**/*.{js,ts,tsx,json,md}": ["prettier --write"],
+    "**/*.test.{js,ts,tsx}": ["npm run test:staged"]
 }
